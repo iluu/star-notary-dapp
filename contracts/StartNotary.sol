@@ -40,11 +40,13 @@ contract StarNotary is ERC721 {
         return _symbol;
     }
 
-    // Create Star using the Struct
-    function createStar(string memory _name, uint256 _tokenId) public { // Passing the name and tokenId as a parameters
-        Star memory newStar = Star(_name); // Star is an struct so we are creating a new Star
+    /**
+     * Creates a star with given name and token id 
+     */
+    function createStar(string memory _starName, uint256 _tokenId) public {
+        Star memory newStar = Star(_starName);
         tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
-        _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
+        _mint(msg.sender, _tokenId); // _mint creates new token if non with given id exists, msn.sender will own the token
     }
 
     // Putting an Star for sale (Adding the star tokenid into the mapping starsForSale, first verify that the sender is the owner)
@@ -61,10 +63,12 @@ contract StarNotary is ERC721 {
 
     function buyStar(uint256 _tokenId) public  payable {
         require(starsForSale[_tokenId] > 0, "The Star should be up for sale");
+
         uint256 starCost = starsForSale[_tokenId];
         address ownerAddress = ownerOf(_tokenId);
         require(msg.value > starCost, "You need to have enough Ether");
         _transferFrom(ownerAddress, msg.sender, _tokenId); // We can't use _addTokenTo or_removeTokenFrom functions, now we have to use _transferFrom
+
         address payable ownerAddressPayable = _make_payable(ownerAddress); // We need to make this conversion to be able to use transfer() function to transfer ethers
         ownerAddressPayable.transfer(starCost);
         if(msg.value > starCost) {
@@ -72,9 +76,11 @@ contract StarNotary is ERC721 {
         }
     }
 
-    // Implement Task 1 lookUptokenIdToStarInfo
-    function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
-        //1. You should return the Star saved in tokenIdToStarInfo mapping
+    /**
+     * @return name of the star by its tokenId
+     */
+    function lookUptokenIdToStarInfo (uint256 _tokenId) public view returns (string memory) {
+        return tokenIdToStarInfo[_tokenId].name;
     }
 
     // Implement Task 1 Exchange Stars function

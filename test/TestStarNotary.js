@@ -24,7 +24,7 @@ it('can Create a Star', async() => {
 
     await instance.createStar('Awesome Star!', tokenId, {from: accounts[0]})
 
-    assert.equal(await instance.tokenIdToStarInfo.call(tokenId), 'Awesome Star!')
+    assert.equal(await instance.lookUptokenIdToStarInfo(tokenId), 'Awesome Star!')
 });
 
 it('lets user1 put up their star for sale', async() => {
