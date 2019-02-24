@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>StarNotary DAPP</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  </head>
-  <style>
-    input {
-      display: block;
-      margin-bottom: 12px;
-    }
-  </style>
-  <body>
-    <h1>StarNotary Token DAPP</h1>
 
-    <hr>
+<head>
+  <title>StarNotary DAPP</title>
+  <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'
+    type='text/css' />
+</head>
 
-    <br>
-      <h1>Create a Star</h1>
-      <br><label for="starName">Star Name:</label><input type="text" id="starName"></input>
-      <br><label for="starId">Star ID:</label><input type="text" id="starId"></input>
-      <br><br><button id="createStar" onclick="App.createStar()">Create Star</button>
-      <br>
-      <hr>
-      <br>
-      <h1>Look up a Star</h1>
-      <br><label for="name">Star ID:</label><input type="text" id="lookid"></input>
-      <br><br><button onclick="App.lookUp()">Look Up a Star</button>
-      <hr>
-      <br>
-      <span id="status"></span>
-      <br>
-    <script src="index.js"></script>
-  </body>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Udacity Star Token (UST) DAPP</h1>
+      <p class="lead">Contract on Rinkeby: <a href="https://rinkeby.etherscan.io/address/0x7933e4aaccc08ee7ca774360b55238a20bd76a9e">0x7933e4aaCcc08Ee7ca774360b55238a20bd76a9E</a></p>
+    </div>
+    <div class="alert alert-info" role="alert" id="status"></div>
+    <div class="card-deck mb-2">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Create a Star</h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+              <label for="starName">Star Name:</label>
+              <input type="text" id="starName" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="starId">Star ID:</label>
+              <input type="text" id="starId" class="form-control" />
+            </div>
+            <button class="btn btn-primary" id="createStar" onclick="App.createStar()">Create Star</button>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Look up a Star</h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+              <label for="lookUpId">Star ID:</label>
+              <input type="text" id="lookUpId" class="form-control" />
+            </div>
+            <button class="btn btn-secondary" onclick="App.lookUp()">Look Up a Star</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
 </html>
